@@ -1,0 +1,17 @@
+{
+  "name": "debounced",
+  "version": "1.0.0",
+  "description": "asyncronously postpone target function execution by some milliseconds",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo 'TODO'"
+  },
+  "keywords": [
+    "async",
+    "debounce",
+    "sleep",
+    "schedule"
+  ],
+  "author": "Anton Yashchuk",
+  "license": "MIT"
+}
