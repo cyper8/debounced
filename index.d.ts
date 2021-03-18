@@ -1,0 +1,1 @@
+type Debounced<T> = (func: (...args: unknown[]) => <T>, backoff: Number) => Promise<T>;
