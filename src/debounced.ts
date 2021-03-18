@@ -1,5 +1,5 @@
-export function Debounced(func: Function, backoff: number): () => void {
-  var timer;
+export function Debounced(func: Function, backoff: number): (...args: unknown[]) => void {
+  var timer: number | undefined;
   return function () {
     var self = this;
     var evtargs = arguments;
