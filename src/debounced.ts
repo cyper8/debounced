@@ -1,16 +1,25 @@
-export function Debounced(func: Function, backoff: number): (...args: unknown[]) => void {
+export function Debounced<T>(func: (...args: any[]) => T, backoff: number): (...args: any[]) => Promise<T> {
   var timer: number | undefined;
-  return function () {
+  var result: Promise<T>;
+  return function (): Promise<T> {
     var self = this;
-    var evtargs = arguments;
+    var evtargs = Array.from(arguments);
+
     if (timer) {
       clearTimeout(timer);
       timer = undefined;
     }
-    timer = setTimeout(function () {
-      clearTimeout(timer);
-      timer = undefined;
-      func.apply(self, evtargs);
-    }, backoff);
+
+    if (result) {
+      return result;
+    } else {
+      return result = new Promise<T>(resolve => {
+        timer = setTimeout(function () {
+          clearTimeout(timer);
+          timer = undefined;
+          resolve(func.apply(self, evtargs));
+        }, backoff);
+      })
+    }
   }
 }

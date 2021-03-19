@@ -3,13 +3,10 @@ import { Debounced } from '../index';
 
 describe('Debounced func', async () => {
   const TIMEOUT: number = 100 + Math.round( 900 * Math.random());
-  it('postpones execution approximately by '+TIMEOUT+' ms', done => {
-    const start = Date.now();
-
-    function Test(start: number): void {
-      expect(Date.now() - start).to.be.approximately(TIMEOUT, 10);
-      done();
+  it('postpones execution approximately by '+TIMEOUT+' ms', async () => {
+    function Test(start: number): number {
+      return Date.now() -start;
     }
-    Debounced(Test, TIMEOUT)(start);
+    expect(await Debounced(Test, TIMEOUT)(Date.now())).to.be.approximately(TIMEOUT, 10);
   });
 });
