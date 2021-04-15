@@ -1,5 +1,8 @@
-export function Debounced<T>(func: (...args: any[]) => T, backoff: number): (...args: any[]) => Promise<T> {
-  var timer: number | undefined;
+export function Debounced<T>(
+  func: (...args: any[]) => T,
+  backoff: number
+): (...args: any[]) => Promise<T> {
+  var timer: any;
   var result: Promise<T>;
   return function (): Promise<T> {
     var self = this;
@@ -13,13 +16,13 @@ export function Debounced<T>(func: (...args: any[]) => T, backoff: number): (...
     if (result) {
       return result;
     } else {
-      return result = new Promise<T>(resolve => {
+      return (result = new Promise<T>((resolve) => {
         timer = setTimeout(function () {
           clearTimeout(timer);
           timer = undefined;
           resolve(func.apply(self, evtargs));
         }, backoff);
-      })
+      }));
     }
-  }
+  };
 }
