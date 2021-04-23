@@ -4,7 +4,7 @@
   "description": "asyncronously postpone target function execution by some milliseconds",
   "main": "./dist/src/index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "rm -rf ./dist && tsc",
     "test": "npm run build && env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r ts-node/register 'test/**/*.ts'"
   },
   "keywords": [
